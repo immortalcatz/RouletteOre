@@ -1,7 +1,10 @@
 package rouletteores.handlers;
 
+import java.util.ArrayList;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.BlockOre;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
@@ -36,6 +39,20 @@ public class EventHandler
 					if(part.toLowerCase().startsWith("ore") || part.toLowerCase().endsWith("ore"))
 					{
 						flag = true;
+						break;
+					}
+				}
+			}
+			
+			if(RO_Settings.nonDropSelf)
+			{
+				ArrayList<ItemStack> drops = event.block.getDrops(event.world, event.x, event.y, event.z, event.blockMetadata, event.fortuneLevel);
+				
+				for(ItemStack item : drops)
+				{
+					if(item != null && item.getItem() == Item.getItemFromBlock(event.block) && item.getItemDamage() == event.blockMetadata)
+					{
+						flag = false;
 						break;
 					}
 				}
