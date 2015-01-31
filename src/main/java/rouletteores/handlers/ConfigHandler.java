@@ -46,9 +46,18 @@ public class ConfigHandler
 		{
 				"/tell {player} You just murdered an innocent ore :(",
 				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"NOPE.\"}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
+				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:16}",
 				"/summon PrimedTnt ~ ~ ~ {Fuse:380,Riding:{id:XPOrb}}",
 				"/setblock ~ ~ ~ minecraft:bedrock",
-				"/setblock ~ ~ ~ minecraft:mob_spawner {EntityId:Zombie,Delay:1}",
 				"/summon Item ~ ~ ~ {Item:{id:264,Count:1}}",
 				"/summon Silverfish ~ ~ ~ {CustomName:\"Troll Fish\",CustomNameVisible:10,ActiveEffects:[{Id:11,Amplifier:10,Duration:300}]}",
 				"/summon ThrownPotion ~ ~ ~ {Riding:{CustomName:\"Poison Fish\",CustomNameVisible:10,id:Silverfish},Potion:{id:373,Count:1,Damage:16388}}",
@@ -56,7 +65,7 @@ public class ConfigHandler
 		        "/summon ThrownPotion ~ ~ ~ {Potion:{id:373,Damage:16396,Count:1}}",
 		        "/summon ThrownExpBottle ~ ~ ~",
 		        "/summon PrimedTnt ~ ~ ~ {Fuse:380,Riding:{CustomName:\"Hugs!\",CustomNameVisible:10,id:Zombie,IsBaby:1}}",
-		        "/setblock ~ ~ ~ minecraft:mob_spawner 0 replace {EntityID:Zombie}",
+		        "/setblock ~ ~ ~ minecraft:mob_spawner 0 replace {EntityId:Zombie}",
 		        "/setblock ~ ~ ~ minecraft:flowing_water",
 		        "/setblock ~ ~ ~ minecraft:flowing_lava",
 		        "/summon EnderCrystal ~ ~ ~ {Riding:Bat}",
@@ -65,7 +74,13 @@ public class ConfigHandler
 		        "/playsound ambient.cave.cave {player} ~ ~ ~ 1.0 0.01",
 		        "/playsound random.explode {player}",
 		        "/playsound game.tnt.primed {player}",
-		        "/setblock ~ ~ ~ minecraft:fire"
+		        "/setblock ~ ~ ~ minecraft:fire",
+		        "/summon Item ~ ~ ~ {Item:{id:311,Count:1,tag:{AttributeModifiers:[{AttributeName:\"generic.maxHealth\",Name:\"generic.maxHealth\",Amount:3,Operation:0,UUIDLeast:894654,UUIDMost:2872}],display:{Name:Buff Chestplate},ench:[{id:0,lvl:3}]}}}",
+		        "/summon Item ~ ~ ~ {Item:{id:diamond_helmet,Count:1,tag:{AttributeModifiers:[{AttributeName:\"generic.maxHealth\",Name:\"generic.maxHealth\",Amount:2,Operation:0,UUIDLeast:894654,UUIDMost:2872}],display:{Name:Buff Helmet}}}}",
+		        "/summon Item ~ ~ ~ {Item:{id:diamond_leggings,Count:1,tag:{AttributeModifiers:[{AttributeName:\"generic.maxHealth\",Name:\"generic.maxHealth\",Amount:3,Operation:0,UUIDLeast:894654,UUIDMost:2872}],display:{Name:Buff Leggings}}}}",
+		        "/summon Item ~ ~ ~ {Item:{id:diamond_boots,Count:1,tag:{AttributeModifiers:[{AttributeName:\"generic.maxHealth\",Name:\"generic.maxHealth\",Amount:2,Operation:0,UUIDLeast:894654,UUIDMost:2872}],display:{Name:Buff Boots}}}}",
+		        "/summon Item ~ ~ ~ {Item:{id:diamond_sword,Count:1,tag:{display:{Name:Buff Sword},ench:[{id:16,lvl:5},{id:20,lvl:1},{id:21,lvl:3},{id:34,lvl:3}]}}}",
+		        "/setblock ~ ~ ~ minecraft:mob_spawner 0 replace {EntityId:ThrownPotion,SpawnData:{Riding:{id:XPOrb},Potion:{id:373,Damage:8228,Count:1}},SpawnCount:1,SpawnRange:16,RequiredPlayerRange:24,MinSpawnDelay:30,MaxSpawnDelay:30,MaxNearbyEntities:10}"
 		};
 	}
 }
