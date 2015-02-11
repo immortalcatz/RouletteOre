@@ -113,7 +113,7 @@ public class UpdateNotification
 		return 0;
 	}
 	
-	private String[] getNotification(String link, boolean doRedirect) throws Exception
+	public static String[] getNotification(String link, boolean doRedirect) throws Exception
 	{
 		URL url = new URL(link);
 		HttpURLConnection.setFollowRedirects(false);

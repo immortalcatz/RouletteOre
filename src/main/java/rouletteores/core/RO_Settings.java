@@ -12,4 +12,5 @@ public class RO_Settings
 	public static ArrayList<String> commands = new ArrayList<String>();
 	public static boolean nonDropSelf = true;
 	public static boolean hideUpdates = false;
+	public static boolean useOnline = true;
 }
