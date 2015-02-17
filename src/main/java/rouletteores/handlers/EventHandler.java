@@ -3,11 +3,13 @@ package rouletteores.handlers;
 import java.util.ArrayList;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.BlockOre;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import rouletteores.core.RO_Settings;
 import rouletteores.core.RouletteOres;
@@ -26,7 +28,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void onHarvest(HarvestDropsEvent event)
 	{
-		if(!event.world.isRemote && event.harvester != null)
+		if(!event.world.isRemote && event.harvester != null && event.harvester instanceof EntityPlayer && (RO_Settings.fakePlayers || !(event.harvester instanceof FakePlayer)))
 		{
 			String[] nameParts = event.block.getUnlocalizedName().split("\\.");
 			

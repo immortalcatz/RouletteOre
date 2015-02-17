@@ -26,6 +26,7 @@ public class ConfigHandler
 		RO_Settings.useOnline = config.getBoolean("Use Online Defaults", Configuration.CATEGORY_GENERAL, true, "Use Funwayguy's pick of commands (Must be connected to the internet. Overwrites local list)");
 		RO_Settings.nonDropSelf = config.getBoolean("Non-self Ore Drops", Configuration.CATEGORY_GENERAL, true, "Check whether the ore drop is itself or not. Prevent's exploits on ores like iron");
 		RO_Settings.chance = config.getFloat("Roulette Chance", Configuration.CATEGORY_GENERAL, 0.01F, 0.0F, 1.0F, "Chance a random command will be run");
+		RO_Settings.fakePlayers = config.getBoolean("Enable Fake Players", Configuration.CATEGORY_GENERAL, false, "Enable machines using 'fake' player instances to trigger RouletteOres");
 		String[] tmpList = config.getStringList("Roulette Commands", Configuration.CATEGORY_GENERAL, defComs, "List of possible commands (Turn off online defaults if editing)");
 		
 		Property prop = config.get(Configuration.CATEGORY_GENERAL, "Roulette Commands", defComs, "List of possible commands (Turn off online defaults if editing)");

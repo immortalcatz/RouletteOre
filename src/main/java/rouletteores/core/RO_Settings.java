@@ -13,4 +13,5 @@ public class RO_Settings
 	public static boolean nonDropSelf = true;
 	public static boolean hideUpdates = false;
 	public static boolean useOnline = true;
+	public static boolean fakePlayers = false;
 }
