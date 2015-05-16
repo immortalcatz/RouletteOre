@@ -1,11 +1,11 @@
 package rouletteores.handlers;
 
-import java.util.ArrayList;
-import rouletteores.core.RO_Settings;
-import rouletteores.core.RouletteOres;
+import java.util.Arrays;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import org.apache.logging.log4j.Level;
+import rouletteores.core.RO_Settings;
+import rouletteores.core.RouletteOres;
 
 public class ConfigHandler
 {
@@ -27,7 +27,11 @@ public class ConfigHandler
 		RO_Settings.nonDropSelf = config.getBoolean("Non-self Ore Drops", Configuration.CATEGORY_GENERAL, true, "Check whether the ore drop is itself or not. Prevent's exploits on ores like iron");
 		RO_Settings.chance = config.getFloat("Roulette Chance", Configuration.CATEGORY_GENERAL, 0.01F, 0.0F, 1.0F, "Chance a random command will be run");
 		RO_Settings.fakePlayers = config.getBoolean("Enable Fake Players", Configuration.CATEGORY_GENERAL, false, "Enable machines using 'fake' player instances to trigger RouletteOres");
-		String[] tmpList = config.getStringList("Roulette Commands", Configuration.CATEGORY_GENERAL, defComs, "List of possible commands (Turn off online defaults if editing)");
+		RO_Settings.silkImmunity = config.getBoolean("Silk Immunity", Configuration.CATEGORY_GENERAL, true, "Using silk touch on ores prevents triggering events");
+		RO_Settings.commands.clear();
+		RO_Settings.commands.addAll(Arrays.asList(config.getStringList("Roulette Commands", Configuration.CATEGORY_GENERAL, defComs, "List of possible commands (Turn off online defaults if editing)(use ';;' to split multiple commands)")));
+		RO_Settings.extraOres.clear();
+		RO_Settings.extraOres.addAll(Arrays.asList(config.getStringList("Extra Ores", Configuration.CATEGORY_GENERAL, new String[]{}, "Additional blocks that should be treated as 'ores' (Ignores non-self drops)")));
 		
 		Property prop = config.get(Configuration.CATEGORY_GENERAL, "Roulette Commands", defComs, "List of possible commands (Turn off online defaults if editing)");
 		
@@ -46,19 +50,11 @@ public class ConfigHandler
 			if(onlineList != null && onlineList.length > 0)
 			{
 				prop.set(onlineList);
-				tmpList = onlineList;
-				RouletteOres.logger.log(Level.INFO, "Loaded online defaults");
+				RO_Settings.commands.clear();
+				RO_Settings.commands.addAll(Arrays.asList(onlineList));
+				RouletteOres.logger.log(Level.INFO, "Loaded online default commands");
 			}
 		}
-		
-		ArrayList<String> list = new ArrayList<String>();
-		
-		for(String com : tmpList)
-		{
-			list.add(com);
-		}
-		
-		RO_Settings.commands = list;
 		
 		config.save();
 		
@@ -70,12 +66,6 @@ public class ConfigHandler
 		defComs = new String[]
 		{
 				"/tell {player} You just murdered an innocent ore :(",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"NOPE.\"}",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
-				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
 				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
 				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",
 				"/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:0}",

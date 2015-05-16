@@ -14,4 +14,6 @@ public class RO_Settings
 	public static boolean hideUpdates = false;
 	public static boolean useOnline = true;
 	public static boolean fakePlayers = false;
+	public static boolean silkImmunity = true;
+	public static ArrayList<String> extraOres = new ArrayList<String>();
 }
