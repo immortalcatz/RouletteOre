@@ -69,7 +69,7 @@ public class EventHandler
 			{
 				MinecraftServer server = MinecraftServer.getServer();
 				
-				if(server != null && RO_Settings.commands.size() > 0 && event.world.rand.nextFloat() < RO_Settings.chance)
+				if(server != null && RO_Settings.commands.size() > 0 && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel : 1F)))
 				{
 					lastWorld = event.world;
 					lastX = event.x;
@@ -83,7 +83,11 @@ public class EventHandler
 						cmd = cmd.replaceAll("\\{player\\}", event.harvester.getCommandSenderName()).trim();
 						
 						OreCommandSender sender = new OreCommandSender(event.harvester, event.x, event.y, event.z);
+						
+						Boolean rule = MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput");
+						MinecraftServer.getServer().worldServers[0].getGameRules().setOrCreateGameRule("commandBlockOutput", "false");
 						server.getCommandManager().executeCommand(sender, cmd);
+						MinecraftServer.getServer().worldServers[0].getGameRules().setOrCreateGameRule("commandBlockOutput", rule.toString());
 					}
 				}
 			}

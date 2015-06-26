@@ -1,8 +1,10 @@
 package rouletteores.core;
 
-import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
+import rouletteores.blocks.BlockRoulette;
+import rouletteores.blocks.tiles.TileEntityRoulette;
 import rouletteores.core.proxies.CommonProxy;
 import rouletteores.handlers.ConfigHandler;
 import cpw.mods.fml.common.Mod;
@@ -14,6 +16,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = RouletteOres.MODID, version = RouletteOres.VERSION, name = RouletteOres.NAME, guiFactory = "rouletteores.handlers.ConfigGuiFactory")
 public class RouletteOres
@@ -32,10 +35,7 @@ public class RouletteOres
 	public SimpleNetworkWrapper network ;
 	public static Logger logger;
 	
-	/**
-	 * Purely used for returning faking filled slots
-	 */
-	public static Item locked;
+	public static Block oreRoulette;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -51,6 +51,9 @@ public class RouletteOres
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	oreRoulette = new BlockRoulette();
+    	GameRegistry.registerBlock(oreRoulette, "ore_roulette");
+    	GameRegistry.registerTileEntity(TileEntityRoulette.class, "tile.rouletteores.ore");
     }
     
     @EventHandler

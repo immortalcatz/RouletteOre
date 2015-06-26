@@ -1,14 +1,17 @@
 package rouletteores.handlers;
 
-import net.minecraft.command.ICommandSender;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import rouletteores.core.RouletteOres;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class OreCommandSender implements ICommandSender
+public class OreCommandSender extends CommandBlockLogic
 {
 	EntityPlayer harvester;
 	ChunkCoordinates blockLoc;
@@ -57,4 +60,17 @@ public class OreCommandSender implements ICommandSender
 	{
 		return harvester != null? harvester.worldObj : null;
 	}
+
+    public void func_145756_e(){}
+
+    @SideOnly(Side.CLIENT)
+    public int func_145751_f()
+    {
+    	return 0; // Unknown purpose
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void func_145757_a(ByteBuf p_145757_1_){};
+
+    public void func_145750_b(IChatComponent p_145750_1_){}
 }
