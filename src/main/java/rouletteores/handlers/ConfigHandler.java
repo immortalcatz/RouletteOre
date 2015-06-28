@@ -75,18 +75,38 @@ public class ConfigHandler
 		        "/summon Creeper ~ ~ ~ {powered:1,CustomName:\"Roulette Creeper\",ExplosionRadius:16}",
 		        "/summon PrimedTnt ~ ~ ~ {Fuse:380,Riding:{id:XPOrb}}",
 		        "/setblock ~ ~ ~ minecraft:bedrock",
-		        "/summon Item ~ ~ ~ {Item:{id:263,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:264,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:265,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:266,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:289,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:318,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:331,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:351,Count:1,Damage:4}}",
-		        "/summon Item ~ ~ ~ {Item:{id:352,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:371,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:388,Count:1}}",
-		        "/summon Item ~ ~ ~ {Item:{id:406,Count:1}}",
+		        "/summon Item ~ ~ ~ {Item:{id:263,Count:1}}", // Coal
+		        "/summon Item ~ ~ ~ {Item:{id:264,Count:1}}", // Diamond
+		        "/summon Item ~ ~ ~ {Item:{id:265,Count:1}}", // Iron
+		        "/summon Item ~ ~ ~ {Item:{id:266,Count:1}}", // Gold
+		        "/summon Item ~ ~ ~ {Item:{id:289,Count:1}}", // Gunpowder
+		        "/summon Item ~ ~ ~ {Item:{id:318,Count:1}}", // Flint
+		        "/summon Item ~ ~ ~ {Item:{id:331,Count:8}}", // Redstone
+		        "/summon Item ~ ~ ~ {Item:{id:351,Count:8,Damage:4}}", // Lapis
+		        "/summon Item ~ ~ ~ {Item:{id:352,Count:1}}", // Bone
+		        "/summon Item ~ ~ ~ {Item:{id:371,Count:1}}", // Nugget
+		        "/summon Item ~ ~ ~ {Item:{id:388,Count:1}}", // Emerald
+		        "/summon Item ~ ~ ~ {Item:{id:406,Count:4}}", // Quartz
+		        "/summon Item ~ ~ ~ {Item:{id:357,Count:16}}", // Cookies
+		        "/summon Item ~ ~ ~ {Item:{id:360,Count:8}}", // Melons
+		        "/summon Item ~ ~ ~ {Item:{id:364,Count:1}}", // Steak
+		        "/summon Item ~ ~ ~ {Item:{id:366,Count:1,display:{Name:\"Wall Chicken\"}}}", // (Wall) Chicken
+		        "/summon Item ~ ~ ~ {Item:{id:367,Count:1}}", // Flesh
+		        "/summon Item ~ ~ ~ {Item:{id:369,Count:1}}", // Ender Pearl
+		        "/summon Item ~ ~ ~ {Item:{id:369,Count:1}}", // Blaze Rod
+		        "/summon Item ~ ~ ~ {Item:{id:370,Count:1}}", // Ghast Tear
+		        "/summon Item ~ ~ ~ {Item:{id:372,Count:1}}", // Nether Wart
+		        "/summon Item ~ ~ ~ {Item:{id:375,Count:1}}", // Spider Eye
+		        "/summon Item ~ ~ ~ {Item:{id:377,Count:1}}", // Blaze Powder
+		        "/summon Item ~ ~ ~ {Item:{id:381,Count:1}}", // Ender Eye
+		        "/summon Item ~ ~ ~ {Item:{id:381,Count:1}}", // Golden Melon
+		        "/summon Item ~ ~ ~ {Item:{id:399,Count:1}}", // Nether Star
+		        "/summon Item ~ ~ ~ {Item:{id:396,Count:1}}", // Golden Carrot
+		        "/summon Item ~ ~ ~ {Item:{id:391,Count:1}}", // Carrot
+		        "/summon Item ~ ~ ~ {Item:{id:392,Count:1}}", // Potato
+		        "/summon Item ~ ~ ~ {Item:{id:2266,Count:1}}", // 11
+		        "/summon Item ~ ~ ~ {Item:{id:353,Count:1}}", // Sugar
+		        "/summon Item ~ ~ ~ {Item:{id:374,Count:1}}", // Bottle
 		        "/summon Silverfish ~ ~ ~ {CustomName:\"Troll Fish\",CustomNameVisible:10,ActiveEffects:[{Id:11,Amplifier:10,Duration:300}]}",
 		        "/summon Zombie ~ ~ ~ {CustomName:\"Gary Coleman\",IsBaby:1,CustomNameVisible:10}",
 		        "/summon Chicken ~ ~ ~ {CustomName:\"Cluckington\",CustomNameVisible:10}",

@@ -1,6 +1,7 @@
 package rouletteores.client;
 
 import org.lwjgl.opengl.GL11;
+import rouletteores.blocks.BlockRoulette;
 import rouletteores.blocks.tiles.TileEntityRoulette;
 import rouletteores.core.RouletteOres;
 import net.minecraft.block.Block;
@@ -14,7 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class SpecialRendererBlockRoulette implements ISimpleBlockRenderingHandler
 {
-	public static int renderID = -1;
 	TileEntityRoulette tile = new TileEntityRoulette();
 	
 	@Override
@@ -53,6 +53,6 @@ public class SpecialRendererBlockRoulette implements ISimpleBlockRenderingHandle
 	@Override
 	public int getRenderId()
 	{
-		return renderID;
+		return BlockRoulette.renderID;
 	}
 }

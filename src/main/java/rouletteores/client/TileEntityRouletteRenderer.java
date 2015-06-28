@@ -31,6 +31,7 @@ public class TileEntityRouletteRenderer extends TileEntitySpecialRenderer
 		GL11.glTranslated(x + 0.5D, y + 0.5D, z + 0.5D);
 		this.bindTexture(stoneTex);
 		box.renderAll();
+		
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glScalef(1.001F, 1.001F, 1.001F);
 		GL11.glColor4f(hsb.getRed()/255F, hsb.getGreen()/255F, hsb.getBlue()/255F, 1F);
@@ -41,6 +42,7 @@ public class TileEntityRouletteRenderer extends TileEntitySpecialRenderer
 		GL11.glColor4f(1F, 1F, 1F, alpha);
 		this.bindTexture(skull);
 		box.renderAll();
+		GL11.glDisable(GL11.GL_BLEND);
         
         GL11.glPopMatrix();
     }

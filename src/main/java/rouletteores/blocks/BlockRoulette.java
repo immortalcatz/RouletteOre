@@ -1,17 +1,18 @@
 package rouletteores.blocks;
 
 import java.util.Random;
-import rouletteores.blocks.tiles.TileEntityRoulette;
-import rouletteores.client.SpecialRendererBlockRoulette;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import rouletteores.blocks.tiles.TileEntityRoulette;
 
 public class BlockRoulette extends Block implements ITileEntityProvider
 {
+	public static int renderID = -1;
+	
 	public BlockRoulette()
 	{
 		super(Material.rock);
@@ -43,7 +44,7 @@ public class BlockRoulette extends Block implements ITileEntityProvider
 	@Override
 	public int getRenderType()
 	{
-		return SpecialRendererBlockRoulette.renderID;
+		return renderID;
 	}
 	
 	@Override
