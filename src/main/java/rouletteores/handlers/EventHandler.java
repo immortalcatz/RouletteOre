@@ -69,7 +69,7 @@ public class EventHandler
 			{
 				MinecraftServer server = MinecraftServer.getServer();
 				
-				if(server != null && RO_Settings.commands.size() > 0 && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel : 1F)))
+				if(server != null && RO_Settings.commands.size() > 0 && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
 				{
 					lastWorld = event.world;
 					lastX = event.x;
