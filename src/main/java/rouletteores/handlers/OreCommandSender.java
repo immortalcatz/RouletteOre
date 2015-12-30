@@ -2,7 +2,6 @@ package rouletteores.handlers;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.command.server.CommandBlockLogic;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
@@ -13,13 +12,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class OreCommandSender extends CommandBlockLogic
 {
-	EntityPlayer harvester;
+	World world;
 	ChunkCoordinates blockLoc;
     
-    public OreCommandSender(EntityPlayer player, int x, int y, int z)
+    public OreCommandSender(World world, int x, int y, int z)
     {
     	blockLoc = new ChunkCoordinates(x, y, z);
-    	harvester = player;
+    	this.world = world;
     }
     
     @Override
@@ -58,7 +57,7 @@ public class OreCommandSender extends CommandBlockLogic
 	@Override
 	public World getEntityWorld()
 	{
-		return harvester != null? harvester.worldObj : null;
+		return world;
 	}
 
     public void func_145756_e(){}

@@ -32,7 +32,7 @@ public class UpdateNotification
 		
 		try
 		{
-			String[] data = getNotification("http://bit.ly/1J1Vuqp", true);
+			String[] data = getNotification("http://bit.ly/1J1Vuqp", true).split("\\n");
 			
 			if(RO_Settings.hideUpdates)
 			{
@@ -113,7 +113,7 @@ public class UpdateNotification
 		return 0;
 	}
 	
-	public static String[] getNotification(String link, boolean doRedirect) throws Exception
+	public static String getNotification(String link, boolean doRedirect) throws Exception
 	{
 		URL url = new URL(link);
 		HttpURLConnection.setFollowRedirects(false);
@@ -126,6 +126,7 @@ public class UpdateNotification
 		((HttpURLConnection)con).setRequestMethod("GET");
 		con.setConnectTimeout(5000);
 		BufferedInputStream in = new BufferedInputStream(con.getInputStream());
+		HttpURLConnection.setFollowRedirects(true);
 		int responseCode = con.getResponseCode();
 		if(responseCode != HttpURLConnection.HTTP_OK && responseCode != HttpURLConnection.HTTP_MOVED_PERM)
 		{
@@ -156,8 +157,6 @@ public class UpdateNotification
 		}
 		final String page = buffer.toString();
 		
-		String[] pageSplit = page.split("\\n");
-		
-		return pageSplit;
+		return page;
 	}
 }

@@ -1,6 +1,7 @@
 package rouletteores.handlers;
 
 import java.util.ArrayList;
+import org.apache.logging.log4j.Level;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +11,12 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import rouletteores.core.RO_Settings;
 import rouletteores.core.RouletteOres;
+import rouletteores.scheduler.RouletteEvent;
+import rouletteores.scheduler.RouletteRewardRegistry;
+import rouletteores.scheduler.RouletteScheduler;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -67,29 +72,9 @@ public class EventHandler
 			
 			if(flag)
 			{
-				MinecraftServer server = MinecraftServer.getServer();
-				
-				if(server != null && RO_Settings.commands.size() > 0 && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
-				{
-					lastWorld = event.world;
-					lastX = event.x;
-					lastY = event.y;
-					lastZ = event.z;
-					
-					String[] commands = RO_Settings.commands.get(event.world.rand.nextInt(RO_Settings.commands.size())).split(";;");
-					
-					for(String cmd : commands)
-					{
-						cmd = cmd.replaceAll("\\{player\\}", event.harvester.getCommandSenderName()).trim();
-						
-						OreCommandSender sender = new OreCommandSender(event.harvester, event.x, event.y, event.z);
-						
-						Boolean rule = MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput");
-						MinecraftServer.getServer().worldServers[0].getGameRules().setOrCreateGameRule("commandBlockOutput", "false");
-						server.getCommandManager().executeCommand(sender, cmd);
-						MinecraftServer.getServer().worldServers[0].getGameRules().setOrCreateGameRule("commandBlockOutput", rule.toString());
-					}
-				}
+				RouletteEvent re = new RouletteEvent(event.harvester.getCommandSenderName(), event.x, event.y, event.z, RouletteRewardRegistry.getRandomReward(event.world.rand));
+				RouletteScheduler.events.add(re);
+				RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getCommandSenderName() + " triggered event: " + re.reward.getName());
 			}
 		}
 	}
@@ -101,6 +86,15 @@ public class EventHandler
 		{
 			ConfigHandler.config.save();
 			ConfigHandler.initConfigs();
+		}
+	}
+	
+	@SubscribeEvent
+	public void onWorldUnload(WorldEvent.Unload event)
+	{
+		if(!event.world.isRemote && !MinecraftServer.getServer().isServerRunning())
+		{
+			RouletteScheduler.events.clear();
 		}
 	}
 }
