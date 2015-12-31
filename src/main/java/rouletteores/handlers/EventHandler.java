@@ -70,11 +70,15 @@ public class EventHandler
 				}
 			}
 			
-			if(flag)
+			if(flag && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
 			{
 				RouletteEvent re = new RouletteEvent(event.harvester.getCommandSenderName(), event.x, event.y, event.z, RouletteRewardRegistry.getRandomReward(event.world.rand));
-				RouletteScheduler.events.add(re);
-				RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getCommandSenderName() + " triggered event: " + re.reward.getName());
+				
+				if(re != null)
+				{
+					RouletteScheduler.events.add(re);
+					RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getCommandSenderName() + " triggered event: " + re.reward.getName());
+				}
 			}
 		}
 	}
