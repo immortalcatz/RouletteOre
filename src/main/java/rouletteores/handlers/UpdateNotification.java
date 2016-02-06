@@ -5,10 +5,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import rouletteores.core.RO_Settings;
 import rouletteores.core.RouletteOres;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
 
 public class UpdateNotification
 {

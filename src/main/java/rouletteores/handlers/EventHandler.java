@@ -1,7 +1,6 @@
 package rouletteores.handlers;
 
-import java.util.ArrayList;
-import org.apache.logging.log4j.Level;
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,13 +11,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Level;
 import rouletteores.core.RO_Settings;
 import rouletteores.core.RouletteOres;
 import rouletteores.scheduler.RouletteEvent;
 import rouletteores.scheduler.RouletteRewardRegistry;
 import rouletteores.scheduler.RouletteScheduler;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandler
 {
@@ -35,14 +35,15 @@ public class EventHandler
 			return;
 		}
 		
-		String blockID = Block.blockRegistry.getNameForObject(event.block);
-		boolean custom = RO_Settings.extraOres.contains(blockID) || RO_Settings.extraOres.contains(blockID + ":" + event.blockMetadata);
+		String blockID = Block.blockRegistry.getNameForObject(event.state.getBlock()).toString();
+		int blockMeta = event.state.getBlock().getMetaFromState(event.state);
+		boolean custom = RO_Settings.extraOres.contains(blockID) || RO_Settings.extraOres.contains(blockID + ":" + blockMeta);
 		
 		if(!event.world.isRemote && event.harvester != null && event.harvester instanceof EntityPlayer && (RO_Settings.fakePlayers || !(event.harvester instanceof FakePlayer)))
 		{
-			String[] nameParts = event.block.getUnlocalizedName().split("\\.");
+			String[] nameParts = event.state.getBlock().getUnlocalizedName().split("\\.");
 			
-			boolean flag = event.block instanceof BlockOre || custom;
+			boolean flag = event.state.getBlock() instanceof BlockOre || custom;
 			
 			if(!flag)
 			{
@@ -58,11 +59,11 @@ public class EventHandler
 			
 			if(RO_Settings.nonDropSelf && !custom)
 			{
-				ArrayList<ItemStack> drops = event.block.getDrops(event.world, event.x, event.y, event.z, event.blockMetadata, event.fortuneLevel);
+				List<ItemStack> drops = event.state.getBlock().getDrops(event.world, event.pos, event.state, event.fortuneLevel);
 				
 				for(ItemStack item : drops)
 				{
-					if(item != null && item.getItem() == Item.getItemFromBlock(event.block) && item.getItemDamage() == event.blockMetadata)
+					if(item != null && item.getItem() == Item.getItemFromBlock(event.state.getBlock()) && item.getItemDamage() == blockMeta)
 					{
 						flag = false;
 						break;
@@ -70,14 +71,14 @@ public class EventHandler
 				}
 			}
 			
-			if(flag && (event.block == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
+			if(flag && (event.state.getBlock() == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
 			{
-				RouletteEvent re = new RouletteEvent(event.harvester.getCommandSenderName(), event.x, event.y, event.z, RouletteRewardRegistry.getRandomReward(event.world.rand));
+				RouletteEvent re = new RouletteEvent(event.harvester.getName(), event.pos, RouletteRewardRegistry.getRandomReward(event.world.rand));
 				
 				if(re != null)
 				{
 					RouletteScheduler.events.add(re);
-					RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getCommandSenderName() + " triggered event: " + re.reward.getName());
+					RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getName() + " triggered event: " + re.reward.getName());
 				}
 			}
 		}

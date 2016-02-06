@@ -2,22 +2,24 @@ package rouletteores.handlers;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.command.server.CommandBlockLogic;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import rouletteores.core.RouletteOres;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class OreCommandSender extends CommandBlockLogic
 {
 	World world;
-	ChunkCoordinates blockLoc;
+	BlockPos blockLoc;
     
-    public OreCommandSender(World world, int x, int y, int z)
+    public OreCommandSender(World world, BlockPos pos)
     {
-    	blockLoc = new ChunkCoordinates(x, y, z);
+    	blockLoc = pos;
     	this.world = world;
     }
     
@@ -28,15 +30,15 @@ public class OreCommandSender extends CommandBlockLogic
     }
     
     @Override
-    public String getCommandSenderName()
+    public String getName()
     {
         return RouletteOres.NAME;
     }
     
     @Override
-    public IChatComponent func_145748_c_()
+    public IChatComponent getDisplayName()
     {
-        return new ChatComponentText(this.getCommandSenderName());
+        return new ChatComponentText(this.getName());
     }
 
     @Override
@@ -44,12 +46,12 @@ public class OreCommandSender extends CommandBlockLogic
     {
         if (this.getEntityWorld() != null && !this.getEntityWorld().isRemote)
         {
-        	this.getEntityWorld().markBlockForUpdate(blockLoc.posX, blockLoc.posY, blockLoc.posZ);
+        	this.getEntityWorld().markBlockForUpdate(blockLoc);
         }
     }
 
 	@Override
-	public ChunkCoordinates getPlayerCoordinates()
+	public BlockPos getPosition()
 	{
 		return blockLoc;
 	}
@@ -59,17 +61,33 @@ public class OreCommandSender extends CommandBlockLogic
 	{
 		return world;
 	}
-
-    public void func_145756_e(){}
-
+	
+	@Override
+    public void updateCommand(){}
+	
+	@Override
     @SideOnly(Side.CLIENT)
     public int func_145751_f()
     {
     	return 0; // Unknown purpose
     }
-
+	
+	@Override
     @SideOnly(Side.CLIENT)
     public void func_145757_a(ByteBuf p_145757_1_){};
+    
+    @Override
+    public void setLastOutput(IChatComponent p_145750_1_){}
 
-    public void func_145750_b(IChatComponent p_145750_1_){}
+	@Override
+	public Vec3 getPositionVector()
+	{
+		return new Vec3(blockLoc.getX() + 0.5D, blockLoc.getY() + 0.5D, blockLoc.getZ() + 0.5D);
+	}
+
+	@Override
+	public Entity getCommandSenderEntity()
+	{
+		return null;
+	}
 }

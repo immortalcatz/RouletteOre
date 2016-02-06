@@ -1,12 +1,13 @@
 package rouletteores;
 
 import java.util.Random;
-import rouletteores.core.RO_Settings;
-import rouletteores.core.RouletteOres;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import cpw.mods.fml.common.IWorldGenerator;
+import net.minecraftforge.fml.common.IWorldGenerator;
+import rouletteores.core.RO_Settings;
+import rouletteores.core.RouletteOres;
 
 public class RouletteGenerator implements IWorldGenerator
 {
@@ -18,7 +19,7 @@ public class RouletteGenerator implements IWorldGenerator
 			return;
 		}
 		
-		WorldGenMinable rGen = new WorldGenMinable(RouletteOres.oreRoulette, 1);
+		WorldGenMinable rGen = new WorldGenMinable(RouletteOres.oreRoulette.getDefaultState(), 1);
 		
 		for(int i = 0; i < 4; i++)
 		{
@@ -26,7 +27,7 @@ public class RouletteGenerator implements IWorldGenerator
 			int y = rand.nextInt(128);
 			int z = chunkZ*16 + rand.nextInt(16);
 			
-			rGen.generate(world, rand, x, y, z);
+			rGen.generate(world, rand, new BlockPos(x, y, z));
 		}
 	}
 }

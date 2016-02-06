@@ -3,10 +3,10 @@ package rouletteores.scheduler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import net.minecraftforge.fml.common.Loader;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import cpw.mods.fml.common.Loader;
 
 public class RouletteRewardRegistry
 {

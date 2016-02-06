@@ -1,10 +1,13 @@
 package rouletteores.core.proxies;
 
-import rouletteores.blocks.tiles.TileEntityRoulette;
-import rouletteores.client.SpecialRendererBlockRoulette;
-import rouletteores.client.TileEntityRouletteRenderer;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import rouletteores.core.RouletteOres;
+
 
 public class ClientProxy extends CommonProxy
 {
@@ -18,7 +21,19 @@ public class ClientProxy extends CommonProxy
 	public void registerHandlers()
 	{
 		super.registerHandlers();
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoulette.class, new TileEntityRouletteRenderer());
-		RenderingRegistry.registerBlockHandler(new SpecialRendererBlockRoulette());
+	}
+	
+	@Override
+	public void registerRenderers()
+	{
+		super.registerRenderers();
+		
+		registerBlockModel(RouletteOres.oreRoulette);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerBlockModel(Block block)
+	{
+	    Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(RouletteOres.MODID + ":" + block.getUnlocalizedName().substring(5), "inventory"));
 	}
 }

@@ -2,21 +2,20 @@ package rouletteores.core;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Logger;
 import rouletteores.blocks.BlockRoulette;
-import rouletteores.blocks.tiles.TileEntityRoulette;
 import rouletteores.core.proxies.CommonProxy;
 import rouletteores.handlers.ConfigHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = RouletteOres.MODID, version = RouletteOres.VERSION, name = RouletteOres.NAME, guiFactory = "rouletteores.handlers.ConfigGuiFactory")
 public class RouletteOres
@@ -52,8 +51,9 @@ public class RouletteOres
     public void init(FMLInitializationEvent event)
     {
     	oreRoulette = new BlockRoulette();
-    	GameRegistry.registerBlock(oreRoulette, "ore_roulette");
-    	GameRegistry.registerTileEntity(TileEntityRoulette.class, "tile.rouletteores.ore");
+    	GameRegistry.registerBlock(oreRoulette, "roulette_ore");
+    	
+    	proxy.registerRenderers();
     }
     
     @EventHandler
