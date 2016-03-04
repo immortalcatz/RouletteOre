@@ -28,6 +28,6 @@ public class BlockRoulette extends Block
     @SideOnly(Side.CLIENT)
     public EnumWorldBlockLayer getBlockLayer()
     {
-        return EnumWorldBlockLayer.TRANSLUCENT;
+        return EnumWorldBlockLayer.CUTOUT;
     }
 }
