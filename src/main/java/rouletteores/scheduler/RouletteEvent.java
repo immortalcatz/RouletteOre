@@ -1,12 +1,10 @@
 package rouletteores.scheduler;
 
 import java.util.ArrayList;
-import org.apache.logging.log4j.Level;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
-import rouletteores.core.RouletteOres;
 import rouletteores.handlers.OreCommandSender;
 
 public class RouletteEvent
@@ -39,10 +37,8 @@ public class RouletteEvent
 			{
 				cmd = cmd.replaceAll("VAR_NAME", target.getName()).trim(); // New system can't use brackets
 				
-				RouletteOres.logger.log(Level.INFO, "Running comand: " + cmd);
-				
 				OreCommandSender sender = new OreCommandSender(target.worldObj, pos);
-				MinecraftServer server = MinecraftServer.getServer();
+				MinecraftServer server = target.getServer();
 				GameRules rules = server.worldServerForDimension(0).getGameRules();
 				Boolean rule = rules.getBoolean("commandBlockOutput");
 				rules.setOrCreateGameRule("commandBlockOutput", "false");

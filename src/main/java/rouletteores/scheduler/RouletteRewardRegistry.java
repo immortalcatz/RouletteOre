@@ -68,7 +68,11 @@ public class RouletteRewardRegistry
 			
 			RouletteReward r = new RouletteReward();
 			r.readFromJson(e.getAsJsonObject());
-			registerReward(r);
+			
+			if(r.schedule.size() > 0)
+			{
+				registerReward(r);
+			}
 		}
 	}
 	

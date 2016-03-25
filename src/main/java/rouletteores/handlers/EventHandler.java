@@ -3,10 +3,8 @@ package rouletteores.handlers;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
@@ -39,7 +37,7 @@ public class EventHandler
 		int blockMeta = event.state.getBlock().getMetaFromState(event.state);
 		boolean custom = RO_Settings.extraOres.contains(blockID) || RO_Settings.extraOres.contains(blockID + ":" + blockMeta);
 		
-		if(!event.world.isRemote && event.harvester != null && event.harvester instanceof EntityPlayer && (RO_Settings.fakePlayers || !(event.harvester instanceof FakePlayer)))
+		if(!event.world.isRemote && event.harvester != null && (RO_Settings.fakePlayers || !(event.harvester instanceof FakePlayer)))
 		{
 			String[] nameParts = event.state.getBlock().getUnlocalizedName().split("\\.");
 			
@@ -75,7 +73,7 @@ public class EventHandler
 			{
 				RouletteEvent re = new RouletteEvent(event.harvester.getName(), event.pos, RouletteRewardRegistry.getRandomReward(event.world.rand));
 				
-				if(re != null)
+				if(re != null && re.reward != null)
 				{
 					RouletteScheduler.events.add(re);
 					RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getName() + " triggered event: " + re.reward.getName());
@@ -97,7 +95,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void onWorldUnload(WorldEvent.Unload event)
 	{
-		if(!event.world.isRemote && !MinecraftServer.getServer().isServerRunning())
+		if(!event.world.isRemote && !event.world.getMinecraftServer().isServerRunning())
 		{
 			RouletteScheduler.events.clear();
 		}

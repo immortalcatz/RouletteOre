@@ -137,7 +137,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon PrimedTnt ~ ~ ~ {Fuse:380,Riding:{id:XPOrb}}"
+        "command": "/summon XPOrb ~ ~ ~ {Passengers:[{id:PrimedTnt,Fuse:200}]}"
       }
     ]
   },
@@ -709,6 +709,28 @@
     ]
   },
   {
+    "name": "Random Loot",
+    "events": [
+      {
+        "delay": 0,
+        "command": "/summon Item ~ ~ ~ {Item:{id:minecraft:chorus_fruit,Count:8}}"
+      }
+    ]
+  },
+  {
+    "name": "More Ores!",
+    "events": [
+      {
+        "delay": 0,
+        "command": "/summon Item ~ ~ ~ {Item:{id:rouletteores:roulette_ore,Count:8}}"
+      },
+      {
+        "delay": 1,
+        "command": "/tell VAR_NAME Have some more shiny ores!"
+      }
+    ]
+  },
+  {
     "name": "Troll Fish",
     "events": [
       {
@@ -736,11 +758,20 @@
     ]
   },
   {
+    "name": "Shulker",
+    "events": [
+      {
+        "delay": 0,
+        "command": "/summon Shulker ~ ~ ~"
+      }
+    ]
+  },
+  {
     "name": "Poison Fish",
     "events": [
       {
         "delay": 0,
-        "command": "/summon ThrownPotion ~ ~ ~ {Riding:{CustomName:Poison Fish,CustomNameVisible:10,id:Silverfish},Potion:{id:373,Count:1,Damage:16388}}"
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Poison Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{Potion:minecraft:long_poison}}}]}"
       }
     ]
   },
@@ -749,7 +780,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon ThrownPotion ~ ~ ~ {Riding:{CustomName:Death Fish,CustomNameVisible:10,id:Silverfish},Potion:{id:373,Count:1,Damage:16428}}"
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Poison Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{Potion:minecraft:strong_harming}}}]}"
       }
     ]
   },
@@ -758,7 +789,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon ThrownPotion ~ ~ ~ {Riding:{CustomName:Blinding Fish,CustomNameVisible:10,id:Silverfish},Potion:{id:1,Damage:0,tag:{CustomPotionEffects:[{Id:15,Amplifier:0,Duration:900,ShowParticles:0b}]}}}"
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Blinding Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{CustomPotionEffects:[{Id:15,Amplifier:0,Duration:900,ShowParticles:0b}]}}}]}"
       }
     ]
   },
@@ -767,7 +798,25 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon ThrownPotion ~ ~ ~ {Riding:{CustomName:Paralysis Fish,CustomNameVisible:10,id:Silverfish},Potion:{id:1,Damage:16458,tag:{CustomPotionEffects:[{Id:2,Amplifier:10,Duration:900,ShowParticles:0b}]}}}"
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Paralysis Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{CustomPotionEffects:[{Id:2,Amplifier:10,Duration:900,ShowParticles:0b}]}}}]}"
+      }
+    ]
+  },
+  {
+    "name": "Gravity Fish",
+    "events": [
+      {
+        "delay": 0,
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Gravity Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{CustomPotionEffects:[{Id:25,Amplifier:1,Duration:200,ShowParticles:0b}]}}}]}"
+      }
+    ]
+  },
+  {
+    "name": "Famine Fish",
+    "events": [
+      {
+        "delay": 0,
+        "command": "/summon Silverfish ~ ~ ~ {CustomName:Famine Fish,CustomNameVisible:10,Passengers:[{id:ThrownPotion,Potion:{id:lingering_potion,tag:{CustomPotionEffects:[{Id:17,Amplifier:2,Duration:200,ShowParticles:0b}]}}}]}"
       }
     ]
   },
@@ -776,7 +825,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon ThrownPotion ~ ~ ~ {Potion:{id:373,Damage:16396,Count:1}}"
+        "command": "/summon ThrownPotion ~ ~ ~ {Potion:{id:splash_potion,tag:{Potion:minecraft:strong_harming}}}"
       }
     ]
   },
@@ -794,7 +843,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon PrimedTnt ~ ~ ~ {Fuse:380,Riding:{CustomName:Hugs!,CustomNameVisible:10,id:Zombie,IsBaby:1}}"
+        "command": "/summon Zombie ~ ~ ~ {CustomName:Hugs!,CustomNameVisible:10,IsBaby:1,Passengers:[{id:PrimedTnt,Fuse:200}]}"
       }
     ]
   },
@@ -839,7 +888,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon EnderCrystal ~ ~ ~ {Riding:{id:Bat,CustomName:Bat Bomb}}"
+        "command": "/summon Bat ~ ~ ~ {CustomName:Bat Bomb,Passengers:{id:EnderCrystal}}"
       }
     ]
   },
@@ -992,7 +1041,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/setblock ~ ~ ~ minecraft:mob_spawner 0 replace {EntityId:ThrownPotion,SpawnData:{Riding:{id:XPOrb},Potion:{id:373,Damage:8228,Count:1}},SpawnCount:1,SpawnRange:16,RequiredPlayerRange:16,MinSpawnDelay:20,MaxSpawnDelay:20,MaxNearbyEntities:8}"
+        "command": "/setblock ~ ~ ~ minecraft:mob_spawner 0 replace {SpawnData:{id:XPOrb,Passengers:[{id:ThrownPotion,Potion:{id:splash_potion,tag:{Potion:strong_poison}}}]},SpawnCount:1,SpawnRange:16,RequiredPlayerRange:16,MinSpawnDelay:20,MaxSpawnDelay:20,MaxNearbyEntities:8}"
       }
     ]
   },
@@ -1001,7 +1050,7 @@
     "events": [
       {
         "delay": 0,
-        "command": "/summon Zombie ~ ~1 ~ {Riding:{id:ThrownPotion,Potion:{id:15,Damage:16,tag:{CustomPotionEffects:[{Id:15,Amplifier:0,Duration:2400,ShowParticles:0b}]}}},CustomName:Herobrine,CustomNameVisible:1,CanBreakDoors:1,Equipment:[{id:278,Count:1,tag:{ench:[{id:32,lvl:5}]}},{},{},{},{id:397,Damage:3,Count:1,tag:{SkullOwner:Herobrine,ench:[{id:7,lvl:16}]}}],DropChances:[1F,1F,1F,1F,0.0F],Attributes:[{Name:zombie.spawnReinforcements,Base:1.0F}],ActiveEffects:[{Id:5,Amplifier:15,Duration:199980,ShowParticles:0b},{Id:11,Amplifier:10,Duration:2400,ShowParticles:0b}],Attributes:[{Name:generic.maxHealth,Base:200}],Health:200}"
+        "command": "/summon ThrownPotion ~ ~1 ~ {Potion:{id:splash_potion,tag:{CustomPotionEffects:[{Id:15,Amplifier:0,Duration:2400,ShowParticles:0b}]}},Passengers:[{id:Zombie,CustomName:Herobrine,CustomNameVisible:1,CanBreakDoors:1,HandItems:[{id:minecraft:diamond_pickaxe,Count:1,tag:{ench:[{id:32,lvl:5}]}},{}],ArmorItems:[{},{},{},{id:minecraft:skull,Damage:3,Count:1,tag:{SkullOwner:Herobrine,ench:[{id:7,lvl:16}]}}],DropChances:[1F,1F,1F,1F,0.0F],Attributes:[{Name:zombie.spawnReinforcements,Base:1.0F}],ActiveEffects:[{Id:5,Amplifier:15,Duration:199980,ShowParticles:0b},{Id:11,Amplifier:10,Duration:2400,ShowParticles:0b}],Attributes:[{Name:generic.maxHealth,Base:200}],Health:200}]}"
       }
     ]
   },

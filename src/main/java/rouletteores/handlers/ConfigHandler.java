@@ -70,7 +70,7 @@ public class ConfigHandler
 		{
 			try
 			{
-				String onlineList = UpdateNotification.getNotification("https://raw.githubusercontent.com/Funwayguy/RouletteOre-Defaults/master/AdvancedCommands1.8.json", false);
+				String onlineList = UpdateNotification.getNotification("https://raw.githubusercontent.com/Funwayguy/RouletteOre-Defaults/master/AdvancedCommands1.9.json", false);
 				Gson g = new GsonBuilder().setPrettyPrinting().create();
 				JsonArray ja = g.fromJson(onlineList, JsonArray.class);
 				RouletteRewardRegistry.loadRewards(ja, true);
