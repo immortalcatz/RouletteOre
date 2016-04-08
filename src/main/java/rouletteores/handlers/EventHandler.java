@@ -28,20 +28,20 @@ public class EventHandler
 	@SubscribeEvent
 	public void onHarvest(HarvestDropsEvent event)
 	{
-		if(event.isSilkTouching && RO_Settings.silkImmunity)
+		if(event.isSilkTouching() && RO_Settings.silkImmunity)
 		{
 			return;
 		}
 		
-		String blockID = Block.blockRegistry.getNameForObject(event.state.getBlock()).toString();
-		int blockMeta = event.state.getBlock().getMetaFromState(event.state);
+		String blockID = Block.blockRegistry.getNameForObject(event.getState().getBlock()).toString();
+		int blockMeta = event.getState().getBlock().getMetaFromState(event.getState());
 		boolean custom = RO_Settings.extraOres.contains(blockID) || RO_Settings.extraOres.contains(blockID + ":" + blockMeta);
 		
-		if(!event.world.isRemote && event.harvester != null && (RO_Settings.fakePlayers || !(event.harvester instanceof FakePlayer)))
+		if(!event.getWorld().isRemote && event.getHarvester() != null && (RO_Settings.fakePlayers || !(event.getHarvester() instanceof FakePlayer)))
 		{
-			String[] nameParts = event.state.getBlock().getUnlocalizedName().split("\\.");
+			String[] nameParts = event.getState().getBlock().getUnlocalizedName().split("\\.");
 			
-			boolean flag = event.state.getBlock() instanceof BlockOre || custom;
+			boolean flag = event.getState().getBlock() instanceof BlockOre || custom;
 			
 			if(!flag)
 			{
@@ -57,11 +57,11 @@ public class EventHandler
 			
 			if(RO_Settings.nonDropSelf && !custom)
 			{
-				List<ItemStack> drops = event.state.getBlock().getDrops(event.world, event.pos, event.state, event.fortuneLevel);
+				List<ItemStack> drops = event.getState().getBlock().getDrops(event.getWorld(), event.getPos(), event.getState(), event.getFortuneLevel());
 				
 				for(ItemStack item : drops)
 				{
-					if(item != null && item.getItem() == Item.getItemFromBlock(event.state.getBlock()) && item.getItemDamage() == blockMeta)
+					if(item != null && item.getItem() == Item.getItemFromBlock(event.getState().getBlock()) && item.getItemDamage() == blockMeta)
 					{
 						flag = false;
 						break;
@@ -69,14 +69,14 @@ public class EventHandler
 				}
 			}
 			
-			if(flag && (event.state.getBlock() == RouletteOres.oreRoulette || event.world.rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.fortuneLevel + 1F : 1F)))
+			if(flag && (event.getState().getBlock() == RouletteOres.oreRoulette || event.getWorld().rand.nextFloat() < RO_Settings.chance * (RO_Settings.fortuneMult? event.getFortuneLevel() + 1F : 1F)))
 			{
-				RouletteEvent re = new RouletteEvent(event.harvester.getName(), event.pos, RouletteRewardRegistry.getRandomReward(event.world.rand));
+				RouletteEvent re = new RouletteEvent(event.getHarvester().getName(), event.getPos(), RouletteRewardRegistry.getRandomReward(event.getWorld().rand));
 				
 				if(re != null && re.reward != null)
 				{
 					RouletteScheduler.events.add(re);
-					RouletteOres.logger.log(Level.INFO, "Player " + event.harvester.getName() + " triggered event: " + re.reward.getName());
+					RouletteOres.logger.log(Level.INFO, "Player " + event.getHarvester().getName() + " triggered event: " + re.reward.getName());
 				}
 			}
 		}
@@ -85,7 +85,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if(event.modID.equals(RouletteOres.MODID))
+		if(event.getModID().equals(RouletteOres.MODID))
 		{
 			ConfigHandler.config.save();
 			ConfigHandler.initConfigs();
@@ -95,7 +95,7 @@ public class EventHandler
 	@SubscribeEvent
 	public void onWorldUnload(WorldEvent.Unload event)
 	{
-		if(!event.world.isRemote && !event.world.getMinecraftServer().isServerRunning())
+		if(!event.getWorld().isRemote && !event.getWorld().getMinecraftServer().isServerRunning())
 		{
 			RouletteScheduler.events.clear();
 		}
