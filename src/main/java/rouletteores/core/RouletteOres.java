@@ -1,6 +1,7 @@
 package rouletteores.core;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
@@ -35,7 +36,7 @@ public class RouletteOres
 	public SimpleNetworkWrapper network ;
 	public static Logger logger;
 	
-	public static Block oreRoulette;
+	public static Block oreRoulette = new BlockRoulette();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -51,8 +52,8 @@ public class RouletteOres
 	@EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	oreRoulette = new BlockRoulette();
     	GameRegistry.register(oreRoulette, new ResourceLocation(MODID + ":roulette_ore"));
+    	GameRegistry.register(new ItemBlock(oreRoulette), new ResourceLocation(MODID + ":roulette_ore"));
     	
     	proxy.registerRenderers();
     }

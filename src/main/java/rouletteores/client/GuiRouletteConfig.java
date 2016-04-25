@@ -7,9 +7,9 @@ import net.minecraftforge.fml.client.config.GuiConfig;
 import rouletteores.core.RouletteOres;
 import rouletteores.handlers.ConfigHandler;
 
-public class GuiInventoryConfig extends GuiConfig
+public class GuiRouletteConfig extends GuiConfig
 {
-	public GuiInventoryConfig(GuiScreen parent)
+	public GuiRouletteConfig(GuiScreen parent)
 	{
 		super(parent, new ConfigElement(ConfigHandler.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), RouletteOres.MODID, false, false, RouletteOres.NAME);
 	}

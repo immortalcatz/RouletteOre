@@ -46,6 +46,7 @@ public class ConfigHandler
 		RO_Settings.silkImmunity = config.getBoolean("Silk Immunity", Configuration.CATEGORY_GENERAL, true, "Using silk touch on ores prevents triggering events");
 		RO_Settings.fortuneMult = config.getBoolean("Fortune Multiplier", Configuration.CATEGORY_GENERAL, true, "Fortune enchantments multiply the chance of triggering an ore");
 		RO_Settings.genRoulette = config.getBoolean("Generate Ores", Configuration.CATEGORY_GENERAL, true, "Generate the mod's native Roulette Ore");
+		RO_Settings.orePerChunk = config.getInt("Ores Per Chunk", Configuration.CATEGORY_GENERAL, 4, 0, Integer.MAX_VALUE, "Determines how many Roulette Ores generates within each chunk");
 		RO_Settings.extraOres.clear();
 		RO_Settings.extraOres.addAll(Arrays.asList(config.getStringList("Extra Ores", Configuration.CATEGORY_GENERAL, new String[]{}, "Additional blocks that should be treated as 'ores' (Ignores non-self drops)")));
 		

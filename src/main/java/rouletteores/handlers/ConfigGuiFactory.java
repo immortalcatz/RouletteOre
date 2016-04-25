@@ -4,7 +4,7 @@ import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.fml.client.IModGuiFactory;
-import rouletteores.client.GuiInventoryConfig;
+import rouletteores.client.GuiRouletteConfig;
 
 public class ConfigGuiFactory implements IModGuiFactory
 {
@@ -16,7 +16,7 @@ public class ConfigGuiFactory implements IModGuiFactory
 	@Override
 	public Class<? extends GuiScreen> mainConfigGuiClass()
 	{
-		return GuiInventoryConfig.class;
+		return GuiRouletteConfig.class;
 	}
 
 	@Override

@@ -16,5 +16,6 @@ public class RO_Settings
 	public static boolean silkImmunity = true;
 	public static boolean fortuneMult = true;
 	public static boolean genRoulette = true;
+	public static int orePerChunk = 4;
 	public static ArrayList<String> extraOres = new ArrayList<String>();
 }
