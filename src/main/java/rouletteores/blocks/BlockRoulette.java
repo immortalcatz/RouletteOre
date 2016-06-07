@@ -12,8 +12,8 @@ public class BlockRoulette extends Block
 {
 	public BlockRoulette()
 	{
-		super(Material.rock);
-		this.setCreativeTab(CreativeTabs.tabBlock);
+		super(Material.ROCK);
+		this.setCreativeTab(CreativeTabs.MISC);
 		this.setHardness(3F);
 		this.setResistance(5F);
 		this.setUnlocalizedName("roulette_ore");

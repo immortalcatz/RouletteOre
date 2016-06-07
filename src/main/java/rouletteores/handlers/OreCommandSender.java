@@ -70,14 +70,14 @@ public class OreCommandSender extends CommandBlockBaseLogic
 	
 	@Override
     @SideOnly(Side.CLIENT)
-    public int func_145751_f()
+    public int getCommandBlockType()
     {
     	return 0; // Unknown purpose
     }
 	
 	@Override
     @SideOnly(Side.CLIENT)
-    public void func_145757_a(ByteBuf p_145757_1_){};
+    public void fillInInfo(ByteBuf p_145757_1_){};
     
     @Override
     public void setLastOutput(ITextComponent p_145750_1_){}

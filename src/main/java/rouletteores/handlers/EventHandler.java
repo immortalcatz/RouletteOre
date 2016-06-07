@@ -33,7 +33,7 @@ public class EventHandler
 			return;
 		}
 		
-		String blockID = Block.blockRegistry.getNameForObject(event.getState().getBlock()).toString();
+		String blockID = Block.REGISTRY.getNameForObject(event.getState().getBlock()).toString();
 		int blockMeta = event.getState().getBlock().getMetaFromState(event.getState());
 		boolean custom = RO_Settings.extraOres.contains(blockID) || RO_Settings.extraOres.contains(blockID + ":" + blockMeta);
 		
